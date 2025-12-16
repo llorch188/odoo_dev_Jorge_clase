@@ -1,0 +1,18 @@
+<odoo>
+  <data>
+
+    <!-- Top menu item -->
+    <menuitem
+      name="Gestión Restaurante"
+      id="gestion_restaurante_jorge_menu_root"
+    />
+
+    <!-- Menu category -->
+    <menuitem
+      name="Menú"
+      id="gestion_restaurante_jorge_menu_config"
+      parent="gestion_restaurante_jorge_menu_root"
+    />
+
+  </data>
+</odoo>

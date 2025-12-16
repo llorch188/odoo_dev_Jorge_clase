@@ -1,0 +1,67 @@
+<odoo>
+  <data>
+
+    <!-- List view -->
+    <record model="ir.ui.view" id="menu_list_view">
+      <field name="name">menu.list</field>
+      <field name="model">gestion_restaurante_jorge.menu</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="fecha_inicio"/>
+          <field name="fecha_fin"/>
+          <field name="activo"/>
+        </list>
+      </field>
+    </record>
+
+    <!-- Form view -->
+    <record model="ir.ui.view" id="menu_form_view">
+      <field name="name">menu.form</field>
+      <field name="model">gestion_restaurante_jorge.menu</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="descripcion"/>
+              <field name="fecha_inicio"/>
+              <field name="fecha_fin"/>
+              <field name="activo"/>
+            </group>
+
+            <notebook>
+              <page string="Platos">
+                <field name="platos">
+                  <list editable="bottom">
+                    <field name="name"/>
+                    <field name="categoria"/>
+                    <field name="precio"/>
+                    <field name="disponible"/>
+                  </list>
+                </field>
+              </page>
+            </notebook>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="action_menu">
+      <field name="name">Menús</field>
+      <field name="res_model">gestion_restaurante_jorge.menu</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu item -->
+    <menuitem
+      name="Menús"
+      id="menu_menus"
+      parent="gestion_restaurante_jorge_menu_config"
+      action="action_menu"
+    />
+
+  </data>
+</odoo>

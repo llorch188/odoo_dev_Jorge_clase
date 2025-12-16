@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_plato,access_plato,model_gestion_restaurante_jorge_plato,base.group_user,1,1,1,1
+access_menu,access_menu,model_gestion_restaurante_jorge_menu,base.group_user,1,1,1,1
+access_ingrediente,access_ingrediente,model_gestion_restaurante_jorge_ingrediente,base.group_user,1,1,1,1
