@@ -1,31 +1,30 @@
 from odoo import models, fields
 
-
 class Ingrediente(models.Model):
     _name = 'gestion_restaurante_jorge.ingrediente'
-    _description = 'Ingrediente del restaurante'
+    _description = 'Ingrediente'
 
     name = fields.Char(
-        string='Nombre del ingrediente',
+        string="Nombre",
         required=True,
-        help='Nombre del ingrediente'
+        help="Nombre del ingrediente"
     )
 
     es_alergeno = fields.Boolean(
-        string='Es alérgeno',
-        help='Indica si el ingrediente es un alérgeno'
+        string="Es alérgeno",
+        help="Indica si el ingrediente es un alérgeno"
     )
 
     descripcion = fields.Text(
-        string='Descripción',
-        help='Descripción del ingrediente'
+        string="Descripción",
+        help="Descripción del ingrediente"
     )
 
-plato_ids = fields.Many2many(
-    comodel_name='gestion_restaurante_jorge.plato',
-    relation='plato_ingrediente_rel',
-    column1='ingrediente_id',
-    column2='plato_id',
-    string='Platos',
-    help='Platos que utilizan este ingrediente'
-)
+    plato_ids = fields.Many2many(
+        'gestion_restaurante_jorge.plato',
+        'plato_ingrediente_rel',
+        'ingrediente_id',
+        'plato_id',
+        string="Platos",
+        help="Platos que usan este ingrediente"
+    )

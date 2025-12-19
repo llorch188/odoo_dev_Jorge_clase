@@ -23,9 +23,9 @@ Long description of module's purpose
     'data': [
         'security/ir.model.access.csv',
         'views/menu_root.xml',
-        'views/plato_view.xml',
         'views/menu_view.xml',
-        'views/ingrendiente_view.xml',
+        'views/plato_view.xml',
+        'views/ingrediente_view.xml',
     ],
     # only loaded in demonstration mode
     'installable' : True,
