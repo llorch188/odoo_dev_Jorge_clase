@@ -1,5 +1,7 @@
-from odoo import models, fields,api
+from odoo import models, fields, api
+import logging
 
+_logger = logging.getLogger(__name__)
 
 class Plato(models.Model):
     _name = 'gestion_restaurante_jorge.plato'
@@ -26,7 +28,6 @@ class Plato(models.Model):
     disponible = fields.Boolean(
         string='Disponible',
         default=True,
-        required=True,
         help='Indica si el plato está disponible para su venta'
     )
 
@@ -44,7 +45,6 @@ class Plato(models.Model):
 
     description = fields.Text(
         string='Descripción',
-        required=False,
         help='Descripción del plato'
     )
 
@@ -56,10 +56,20 @@ class Plato(models.Model):
     )
 
     ingrediente_ids = fields.Many2many(
-    comodel_name='gestion_restaurante_jorge.ingrediente',
-    relation='plato_ingrediente_rel',
-    column1='plato_id',
-    column2='ingrediente_id',
-    string='Ingredientes',
-    help='Ingredientes que componen el plato'
-)
+        comodel_name='gestion_restaurante_jorge.ingrediente',
+        relation='plato_ingrediente_rel',
+        column1='plato_id',
+        column2='ingrediente_id',
+        string='Ingredientes',
+        help='Ingredientes que componen el plato'
+    )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            _logger.info("Creando Plato: %s", vals.get('name'))
+        return super().create(vals_list)
+
+    def write(self, vals):
+        _logger.info("Modificando Plato ID(s) %s con valores %s", self.ids, vals)
+        return super().write(vals)
