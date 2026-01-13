@@ -1,2 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_gestion_tareas__jorge_gestion_tareas__jorge,gestion_tareas__jorge.gestion_tareas__jorge,model_gestion_tareas__jorge_gestion_tareas__jorge,base.group_user,1,1,1,1
+
+access_tarea,access_tarea,model_gestion_tareas__jorge_tarea,base.group_user,1,1,1,1
+access_historia,access_historia,model_gestion_tareas__jorge_historia,base.group_user,1,1,1,1
+access_proyecto,access_proyecto,model_gestion_tareas__jorge_proyecto,base.group_user,1,1,1,1
+access_tecnologia,access_tecnologia,model_gestion_tareas__jorge_tecnologia,base.group_user,1,1,1,1
+access_sprint,access_sprint,model_gestion_tareas__jorge_sprint,base.group_user,1,1,1,1
