@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from datetime import timedelta
 from odoo.exceptions import UserError
 import logging
 
@@ -178,6 +179,7 @@ class GestionSprint(models.Model):
     def _compute_fecha_fin(self):
         for record in self:
             if record.fecha_ini and record.duracion:
-                record.fecha_fin = record.fecha_ini + fields.Date.to_timedelta(record.duracion)
+                record.fecha_fin = record.fecha_ini + timedelta(days=record.duracion)
             else:
                 record.fecha_fin = False
+                

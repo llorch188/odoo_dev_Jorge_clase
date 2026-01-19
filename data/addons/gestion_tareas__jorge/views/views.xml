@@ -1,61 +1,247 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-
-    <record model="ir.ui.view" id="gestion_tareas__jorge.list">
-      <field name="name">gestion_tareas_Jorge list</field>
-      <field name="model">gestion_tareas__jorge.gestion_tareas__jorge</field>
+    <!-- ================================================= -->
+    <!-- VISTAS LISTA Y FORMULARIO: Tareas -->
+    <!-- ================================================= -->
+    <record id="gestion_tareas__jorge_tarea_list_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.tarea.list</field>
+      <field name="model">gestion_tareas__jorge.tarea</field>
       <field name="arch" type="xml">
-        <list>
+        <tree string="Lista de Tareas">
           <field name="name"/>
           <field name="description"/>
-        </list>
+          <field name="historia_id"/>
+          <field name="tecnologia_ids"/>
+        </tree>
       </field>
     </record>
 
-
-    <!-- actions opening views on models -->
-
-    <record model="ir.actions.act_window" id="gestion_tareas__jorge.action_window">
-      <field name="name">gestion_tareas_Jorge window</field>
-      <field name="res_model">gestion_tareas__jorge.gestion_tareas__jorge</field>
-      <field name="view_mode">list,form</field>
-    </record>
-
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="gestion_tareas__jorge.action_server">
-      <field name="name">gestion_tareas_Jorge server</field>
-      <field name="model_id" ref="model_gestion_tareas__jorge_gestion_tareas__jorge"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "list,form",
-          "res_model": model._name,
-        }
+    <record id="gestion_tareas__jorge_tarea_form_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.tarea.form</field>
+      <field name="model">gestion_tareas__jorge.tarea</field>
+      <field name="arch" type="xml">
+        <form string="Tarea">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="description"/>
+              <field name="historia_id"/>
+              <field name="tecnologia_ids" widget="many2many_tags"/>
+            </group>
+          </sheet>
+        </form>
       </field>
     </record>
--->
 
-    <!-- Top menu item -->
+    <record id="gestion_tareas__jorge_tarea_action" model="ir.actions.act_window">
+      <field name="name">Tareas</field>
+      <field name="res_model">gestion_tareas__jorge.tarea</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_ids" eval="[
+          (5,0,0),
+          (0,0,{'view_mode':'tree','view_id':ref('gestion_tareas__jorge_tarea_list_view')}),
+          (0,0,{'view_mode':'form','view_id':ref('gestion_tareas__jorge_tarea_form_view')})
+      ]"/>
+    </record>
 
-    <menuitem name="gestion_tareas_Jorge" id="gestion_tareas__jorge.menu_root"/>
+    <!-- ================================================= -->
+    <!-- VISTAS LISTA Y FORMULARIO: Historias -->
+    <!-- ================================================= -->
+    <record id="gestion_tareas__jorge_historia_list_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.historia.list</field>
+      <field name="model">gestion_tareas__jorge.historia</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de Historias">
+          <field name="name"/>
+          <field name="description"/>
+          <field name="proyecto_id"/>
+          <field name="tarea_ids"/>
+        </tree>
+      </field>
+    </record>
 
-    <!-- menu categories -->
-    <menuitem name="Menu 1" id="gestion_tareas__jorge.menu_1" parent="gestion_tareas__jorge.menu_root"/>
+    <record id="gestion_tareas__jorge_historia_form_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.historia.form</field>
+      <field name="model">gestion_tareas__jorge.historia</field>
+      <field name="arch" type="xml">
+        <form string="Historia de Usuario">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="description"/>
+              <field name="proyecto_id"/>
+              <field name="tarea_ids"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
 
-<!--
-    <menuitem name="Menu 2" id="gestion_tareas__jorge.menu_2" parent="gestion_tareas__jorge.menu_root"/>
--->
-    <!-- actions -->
+    <record id="gestion_tareas__jorge_historia_action" model="ir.actions.act_window">
+      <field name="name">Historias</field>
+      <field name="res_model">gestion_tareas__jorge.historia</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_ids" eval="[
+          (5,0,0),
+          (0,0,{'view_mode':'tree','view_id':ref('gestion_tareas__jorge_historia_list_view')}),
+          (0,0,{'view_mode':'form','view_id':ref('gestion_tareas__jorge_historia_form_view')})
+      ]"/>
+    </record>
 
-    <menuitem name="List" id="gestion_tareas__jorge.menu_1_list" parent="gestion_tareas__jorge.menu_1"
-              action="gestion_tareas__jorge.action_window"/>
-<!--
-    <menuitem name="Server to list" id="gestion_tareas__jorge" parent="gestion_tareas__jorge.menu_2"
-              action="gestion_tareas__jorge.action_server"/>
--->
+    <!-- ================================================= -->
+    <!-- VISTAS LISTA Y FORMULARIO: Proyectos -->
+    <!-- ================================================= -->
+    <record id="gestion_tareas__jorge_proyecto_list_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.proyecto.list</field>
+      <field name="model">gestion_tareas__jorge.proyecto</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de Proyectos">
+          <field name="name"/>
+          <field name="description"/>
+          <field name="historia_ids"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="gestion_tareas__jorge_proyecto_form_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.proyecto.form</field>
+      <field name="model">gestion_tareas__jorge.proyecto</field>
+      <field name="arch" type="xml">
+        <form string="Proyecto">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="description"/>
+              <field name="historia_ids"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="gestion_tareas__jorge_proyecto_action" model="ir.actions.act_window">
+      <field name="name">Proyectos</field>
+      <field name="res_model">gestion_tareas__jorge.proyecto</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_ids" eval="[
+          (5,0,0),
+          (0,0,{'view_mode':'tree','view_id':ref('gestion_tareas__jorge_proyecto_list_view')}),
+          (0,0,{'view_mode':'form','view_id':ref('gestion_tareas__jorge_proyecto_form_view')})
+      ]"/>
+    </record>
+
+    <!-- ================================================= -->
+    <!-- VISTAS LISTA Y FORMULARIO: Tecnologías -->
+    <!-- ================================================= -->
+    <record id="gestion_tareas__jorge_tecnologia_list_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.tecnologia.list</field>
+      <field name="model">gestion_tareas__jorge.tecnologia</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de Tecnologías">
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="gestion_tareas__jorge_tecnologia_form_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.tecnologia.form</field>
+      <field name="model">gestion_tareas__jorge.tecnologia</field>
+      <field name="arch" type="xml">
+        <form string="Tecnología">
+          <sheet>
+            <group>
+              <field name="name"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="gestion_tareas__jorge_tecnologia_action" model="ir.actions.act_window">
+      <field name="name">Tecnologías</field>
+      <field name="res_model">gestion_tareas__jorge.tecnologia</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_ids" eval="[
+          (5,0,0),
+          (0,0,{'view_mode':'tree','view_id':ref('gestion_tareas__jorge_tecnologia_list_view')}),
+          (0,0,{'view_mode':'form','view_id':ref('gestion_tareas__jorge_tecnologia_form_view')})
+      ]"/>
+    </record>
+
+    <!-- ================================================= -->
+    <!-- VISTAS LISTA Y FORMULARIO: Sprints -->
+    <!-- ================================================= -->
+    <record id="gestion_tareas__jorge_sprint_list_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.sprint.list</field>
+      <field name="model">gestion_tareas__jorge.sprint</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de Sprints">
+          <field name="nombre"/>
+          <field name="fecha_ini"/>
+          <field name="duracion"/>
+          <field name="fecha_fin"/>
+          <field name="proyecto_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="gestion_tareas__jorge_sprint_form_view" model="ir.ui.view">
+      <field name="name">gestion_tareas.sprint.form</field>
+      <field name="model">gestion_tareas__jorge.sprint</field>
+      <field name="arch" type="xml">
+        <form string="Sprint">
+          <sheet>
+            <group>
+              <field name="nombre"/>
+              <field name="fecha_ini"/>
+              <field name="duracion"/>
+              <field name="fecha_fin"/>
+              <field name="proyecto_id"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="gestion_tareas__jorge_sprint_action" model="ir.actions.act_window">
+      <field name="name">Sprints</field>
+      <field name="res_model">gestion_tareas__jorge.sprint</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_ids" eval="[
+          (5,0,0),
+          (0,0,{'view_mode':'tree','view_id':ref('gestion_tareas__jorge_sprint_list_view')}),
+          (0,0,{'view_mode':'form','view_id':ref('gestion_tareas__jorge_sprint_form_view')})
+      ]"/>
+    </record>
+
+    <!-- ================================================= -->
+    <!-- MENÚ PRINCIPAL -->
+    <!-- ================================================= -->
+    <menuitem id="gestion_tareas__jorge_menu_root" name="Gestión de Tareas"/>
+
+    <menuitem id="gestion_tareas__jorge_menu_tareas" 
+              name="Tareas" 
+              parent="gestion_tareas__jorge_menu_root" 
+              action="gestion_tareas__jorge_tarea_action"/>
+
+    <menuitem id="gestion_tareas__jorge_menu_historias" 
+              name="Historias" 
+              parent="gestion_tareas__jorge_menu_root" 
+              action="gestion_tareas__jorge_historia_action"/>
+
+    <menuitem id="gestion_tareas__jorge_menu_proyectos" 
+              name="Proyectos" 
+              parent="gestion_tareas__jorge_menu_root" 
+              action="gestion_tareas__jorge_proyecto_action"/>
+
+    <menuitem id="gestion_tareas__jorge_menu_tecnologias" 
+              name="Tecnologías" 
+              parent="gestion_tareas__jorge_menu_root" 
+              action="gestion_tareas__jorge_tecnologia_action"/>
+
+    <menuitem id="gestion_tareas__jorge_menu_sprints" 
+              name="Sprints" 
+              parent="gestion_tareas__jorge_menu_root" 
+              action="gestion_tareas__jorge_sprint_action"/>
   </data>
 </odoo>
